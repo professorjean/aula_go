@@ -11,7 +11,7 @@ on:
 
 jobs:
 
-  build:
+  teste:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -27,8 +27,14 @@ jobs:
     - name: Roda o Banco
       run: docker-compose up -d
 
-    - name: Build
-      run: go build -v main.go
-
     - name: Test
       run: go test -v main_test.go
+
+  pronto:
+    needs: teste
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build
+      run: go build -v main.go
